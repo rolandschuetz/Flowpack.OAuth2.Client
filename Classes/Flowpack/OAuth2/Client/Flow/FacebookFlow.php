@@ -14,10 +14,10 @@ namespace Flowpack\OAuth2\Client\Flow;
 use Flowpack\OAuth2\Client\Exception\InvalidPartyDataException;
 use Flowpack\OAuth2\Client\Token\AbstractClientToken;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Party\Domain\Model\ElectronicAddress;
-use TYPO3\Party\Domain\Model\Person;
-use TYPO3\Party\Domain\Model\PersonName;
-use TYPO3\Party\Domain\Repository\PartyRepository;
+use Neos\Party\Domain\Model\ElectronicAddress;
+use Neos\Party\Domain\Model\Person;
+use Neos\Party\Domain\Model\PersonName;
+use Neos\Party\Domain\Repository\PartyRepository;
 use Neos\Flow\Configuration\ConfigurationManager;
 
 /**
@@ -59,7 +59,7 @@ class FacebookFlow extends AbstractFlow implements FlowInterface
         $party->addElectronicAddress($electronicAddress);
         $party->setPrimaryElectronicAddress($electronicAddress);
 
-        $partyValidator = $this->validatorResolver->getBaseValidatorConjunction('TYPO3\Party\Domain\Model\Person');
+        $partyValidator = $this->validatorResolver->getBaseValidatorConjunction('Neos\Party\Domain\Model\Person');
         $validationResult = $partyValidator->validate($party);
         if ($validationResult->hasErrors()) {
             throw new InvalidPartyDataException('The created party does not satisfy the requirements', 1384266207);

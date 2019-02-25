@@ -17,7 +17,7 @@ use Neos\Flow\Security\Authentication\TokenInterface;
 use Neos\Flow\Security\Account;
 use Neos\Flow\Security\Policy\PolicyService;
 use Neos\Flow\Validation\ValidatorResolver;
-use TYPO3\Party\Domain\Repository\PartyRepository;
+use Neos\Party\Domain\Repository\PartyRepository;
 
 /**
  */
