@@ -1,22 +1,33 @@
 {
-	"name":"flowpack/oauth2-client",
-	"description":"An OAuth 2.0 authorization framework client for the web application framework TYPO3 Flow.",
-	"keywords":["OAuth2", "TYPO3", "Flow", "Flowpack", "Client"],
-	"type":"typo3-flow-package",
-	"authors":[
-		{
-			"name":"Adrian Föder"
-		},
-		{
-			"name":"Philipp Maier"
-		}
-	],
-	"require":{
-		"typo3/flow": ">=2.1"
-	},
-	"autoload":{
-		"psr-0":{
-			"Flowpack\\OAuth2\\Client":"Classes/"
-		}
-	}
+    "name": "flowpack/oauth2-client",
+    "description": "An OAuth 2.0 authorization framework client for the web application framework TYPO3 Flow.",
+    "keywords": [
+        "OAuth2",
+        "TYPO3",
+        "Flow",
+        "Flowpack",
+        "Client"
+    ],
+    "type": "typo3-flow-package",
+    "authors": [
+        {
+            "name": "Adrian Föder"
+        },
+        {
+            "name": "Philipp Maier"
+        }
+    ],
+    "require": {
+        "typo3/flow": ">=2.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Flowpack\\OAuth2\\Client": "Classes/"
+        }
+    },
+    "extra": {
+        "applied-flow-migrations": [
+            "TYPO3.Neos-201407061038"
+        ]
+    }
 }
