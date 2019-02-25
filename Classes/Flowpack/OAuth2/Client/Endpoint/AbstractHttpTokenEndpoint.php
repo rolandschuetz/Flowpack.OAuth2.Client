@@ -15,7 +15,7 @@ use Flowpack\OAuth2\Client\Exception as OAuth2Exception;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Http\Request;
 use Neos\Flow\Http\Uri;
-use Neos\Flow\Utility\Arrays;
+use Neos\Utility\Arrays;
 
 /**
  */
