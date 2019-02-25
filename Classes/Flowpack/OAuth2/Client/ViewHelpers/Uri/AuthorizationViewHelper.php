@@ -12,7 +12,7 @@ namespace Flowpack\OAuth2\Client\ViewHelpers\Uri;
  *                                                                        */
 
 use Flowpack\OAuth2\Client\UriBuilder;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**

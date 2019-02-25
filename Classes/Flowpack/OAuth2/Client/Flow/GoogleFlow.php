@@ -13,7 +13,7 @@ namespace Flowpack\OAuth2\Client\Flow;
 
 use Flowpack\OAuth2\Client\Exception\InvalidPartyDataException;
 use Flowpack\OAuth2\Client\Token\AbstractClientToken;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use TYPO3\Party\Domain\Model\ElectronicAddress;
 use TYPO3\Party\Domain\Model\Person;
 use TYPO3\Party\Domain\Model\PersonName;
