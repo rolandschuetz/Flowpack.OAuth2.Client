@@ -20,7 +20,7 @@ use TYPO3\Flow\Security\Exception\UnsupportedAuthenticationTokenException;
 use TYPO3\Flow\Security\Policy\PolicyService;
 
 use TYPO3\Flow\Configuration\ConfigurationManager;
-use TYPO3\Flow\Object\ObjectManagerInterface;
+use TYPO3\Flow\ObjectManagement\ObjectManagerInterface;
 
 /**
  */

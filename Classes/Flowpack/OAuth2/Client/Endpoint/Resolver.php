@@ -13,7 +13,7 @@ namespace Flowpack\OAuth2\Client\Endpoint;
 
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Configuration\ConfigurationManager;
-use TYPO3\Flow\Object\ObjectManagerInterface;
+use TYPO3\Flow\ObjectManagement\ObjectManagerInterface;
 
 /**
  * @Flow\Scope("singleton")

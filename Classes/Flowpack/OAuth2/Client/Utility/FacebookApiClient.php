@@ -16,7 +16,7 @@ use TYPO3\Flow\Http\Client\CurlEngine;
 use TYPO3\Flow\Http\Client\RequestEngineInterface;
 use TYPO3\Flow\Http\Request;
 use TYPO3\Flow\Http\Uri;
-use TYPO3\Flow\Object\DependencyInjection\DependencyProxy;
+use TYPO3\Flow\ObjectManagement\DependencyInjection\DependencyProxy;
 
 /**
  * @Flow\Scope("singleton")
