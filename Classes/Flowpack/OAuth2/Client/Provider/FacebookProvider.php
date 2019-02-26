@@ -124,7 +124,6 @@ class FacebookProvider extends AbstractClientProvider
                 $roles[] = $this->policyService->getRole($roleIdentifier);
             }
             $account->setRoles($roles);
-            $this->accountRepository->add($account);
         }
         $authenticationToken->setAccount($account);
 
@@ -132,9 +131,6 @@ class FacebookProvider extends AbstractClientProvider
         $longLivedToken = $this->facebookTokenEndpoint->requestLongLivedToken($credentials['access_token']);
         $account->setCredentialsSource($longLivedToken['access_token']);
         $account->authenticationAttempted(TokenInterface::AUTHENTICATION_SUCCESSFUL);
-
-        $this->accountRepository->update($account);
-        $this->persistenceManager->persistAll();
 
         // Only if defined a Party for the account is created
         if ($this->options['partyCreation'] && $isNewCreatedAccount) {
