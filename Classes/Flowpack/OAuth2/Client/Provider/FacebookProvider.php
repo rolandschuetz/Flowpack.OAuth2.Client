@@ -38,12 +38,6 @@ class FacebookProvider extends AbstractClientProvider
 
     /**
      * @Flow\Inject
-     * @var \Neos\Flow\Security\AccountRepository
-     */
-    protected $accountRepository;
-
-    /**
-     * @Flow\Inject
      * @var \Neos\Flow\Security\Context
      */
     protected $securityContext;
@@ -106,10 +100,6 @@ class FacebookProvider extends AbstractClientProvider
         $account = null;
         $isNewCreatedAccount = false;
         $providerName = $this->name;
-        $accountRepository = $this->accountRepository;
-        $this->securityContext->withoutAuthorizationChecks(function () use ($tokenInformation, $providerName, $accountRepository, &$account) {
-            $account = $accountRepository->findByAccountIdentifierAndAuthenticationProviderName($tokenInformation['user_id'], $providerName);
-        });
 
         if ($account === null) {
             $account = new Account();

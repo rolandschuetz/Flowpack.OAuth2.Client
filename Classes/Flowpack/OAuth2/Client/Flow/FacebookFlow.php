@@ -67,7 +67,6 @@ class FacebookFlow extends AbstractFlow implements FlowInterface
 
         $account = $token->getAccount();
         $account->setParty($party);
-        $this->accountRepository->update($account);
         $this->partyRepository->add($party);
 
         $this->persistenceManager->persistAll();

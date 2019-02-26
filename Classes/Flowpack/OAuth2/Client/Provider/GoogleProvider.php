@@ -54,12 +54,6 @@ class GoogleProvider extends AbstractClientProvider
 
     /**
      * @Flow\Inject
-     * @var \Neos\Flow\Security\AccountRepository
-     */
-    protected $accountRepository;
-
-    /**
-     * @Flow\Inject
      * @var \Neos\Flow\Security\Context
      */
     protected $securityContext;
@@ -111,10 +105,6 @@ class GoogleProvider extends AbstractClientProvider
         $account = null;
         $isNewCreatedAccount = false;
         $providerName = $this->name;
-        $accountRepository = $this->accountRepository;
-        $this->securityContext->withoutAuthorizationChecks(function () use ($tokenInformation, $providerName, $accountRepository, &$account) {
-            $account = $accountRepository->findByAccountIdentifierAndAuthenticationProviderName($tokenInformation['sub'], $providerName);
-        });
 
         if ($account === null) {
             $account = new Account();
@@ -129,7 +119,6 @@ class GoogleProvider extends AbstractClientProvider
                 $roles[] = $this->policyService->getRole($roleIdentifier);
             }
             $account->setRoles($roles);
-            $this->accountRepository->add($account);
         }
 
         $authenticationToken->setAccount($account);
@@ -138,9 +127,6 @@ class GoogleProvider extends AbstractClientProvider
         $longLivedToken = $this->googleTokenEndpoint->requestLongLivedToken($credentials['access_token']);
         $account->setCredentialsSource($longLivedToken['access_token']);
         $account->authenticationAttempted(TokenInterface::AUTHENTICATION_SUCCESSFUL);
-
-        $this->accountRepository->update($account);
-        $this->persistenceManager->persistAll();
 
         // Only if defined a Party for the account is created
         if ($this->options['partyCreation'] && $isNewCreatedAccount) {
