@@ -37,3 +37,6 @@ Neos:
                 - 'https://www.googleapis.com/auth/userinfo.profile'
               partyCreation: true
               display: popup
+  Fusion:
+    defaultContext:
+      OAuth2Client: Flowpack\OAuth2\Client\Eel\AuthorizationHelper
