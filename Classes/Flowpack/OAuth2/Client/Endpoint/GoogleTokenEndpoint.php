@@ -15,7 +15,7 @@ use Flowpack\OAuth2\Client\Exception as OAuth2Exception;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Http\Request;
 use Neos\Flow\Http\Uri;
-use Neos\Flow\Log\SecurityLoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * @Flow\Scope("singleton")
@@ -25,9 +25,9 @@ class GoogleTokenEndpoint extends AbstractHttpTokenEndpoint implements TokenEndp
 
     /**
      * @Flow\Inject
-     * @var SecurityLoggerInterface
+     * @var LoggerInterface
      */
-    protected $securityLogger;
+    protected $systemLogger;
 
     /**
      *
@@ -55,7 +55,7 @@ class GoogleTokenEndpoint extends AbstractHttpTokenEndpoint implements TokenEndp
         $clientIdentifier = (string)$this->clientIdentifier;
 
         if ($responseArray['aud'] !== $clientIdentifier) {
-            $this->securityLogger->log('Requesting validated token information from the Google endpoint did not succeed.', LOG_NOTICE, array('response' => var_export($responseArray, true), 'clientIdentifier' => $clientIdentifier));
+            $this->systemLogger->notice('Requesting validated token information from the Google endpoint did not succeed.', array('response' => var_export($responseArray, true), 'clientIdentifier' => $clientIdentifier));
             return false;
         }
 

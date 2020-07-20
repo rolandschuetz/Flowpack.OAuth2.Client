@@ -15,7 +15,7 @@ use Flowpack\OAuth2\Client\Exception as OAuth2Exception;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Http\Request;
 use Neos\Flow\Http\Uri;
-use Neos\Flow\Log\SecurityLoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * @Flow\Scope("singleton")
@@ -25,9 +25,9 @@ class FacebookTokenEndpoint extends AbstractHttpTokenEndpoint implements TokenEn
 
     /**
      * @Flow\Inject
-     * @var SecurityLoggerInterface
+     * @var LoggerInterface
      */
-    protected $securityLogger;
+    protected $systemLogger;
 
     /**
      * Inspect the received access token as documented in https://developers.facebook.com/docs/facebook-login/access-tokens/, section Getting Info about Tokens and Debugging
@@ -58,7 +58,7 @@ class FacebookTokenEndpoint extends AbstractHttpTokenEndpoint implements TokenEn
         if (!$responseArray['data']['is_valid']
             || $responseArray['data']['app_id'] !== $clientIdentifier
         ) {
-            $this->securityLogger->log('Requesting validated token information from the Facebook endpoint did not succeed.', LOG_NOTICE, array('response' => var_export($responseArray, true), 'clientIdentifier' => $clientIdentifier));
+            $this->systemLogger->notice('Requesting validated token information from the Facebook endpoint did not succeed.', array('response' => var_export($responseArray, true), 'clientIdentifier' => $clientIdentifier));
             return false;
         } else {
             return $responseArray['data'];

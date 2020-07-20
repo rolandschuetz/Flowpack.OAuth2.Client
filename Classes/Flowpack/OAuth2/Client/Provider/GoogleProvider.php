@@ -13,14 +13,13 @@ namespace Flowpack\OAuth2\Client\Provider;
 
 use Flowpack\OAuth2\Client\Token\AbstractClientToken;
 use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Log\SecurityLoggerInterface;
 use Neos\Flow\Security\Account;
 use Neos\Flow\Security\Authentication\TokenInterface;
 use Neos\Flow\Security\Exception\UnsupportedAuthenticationTokenException;
 use Neos\Flow\Security\Policy\PolicyService;
-
 use Neos\Flow\Configuration\ConfigurationManager;
 use Neos\Flow\ObjectManagement\ObjectManagerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  */
@@ -29,10 +28,9 @@ class GoogleProvider extends AbstractClientProvider
 
     /**
      * @Flow\Inject
-     * @var SecurityLoggerInterface
+     * @var LoggerInterface
      */
-    protected $securityLogger;
-
+    protected $systemLogger;
 
     /**
      * @Flow\Inject

@@ -14,10 +14,11 @@ namespace Flowpack\OAuth2\Client\Token;
 use Flowpack\OAuth2\Client\Endpoint\TokenEndpointInterface;
 use Flowpack\OAuth2\Client\Exception;
 use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Log\SecurityLoggerInterface;
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Security\Authentication\Token\AbstractToken;
 use Neos\Flow\Security\Authentication\TokenInterface;
+use Neos\Flow\Log\Utility\LogEnvironment;
+use Psr\Log\LoggerInterface;
 
 /**
  */
@@ -38,9 +39,9 @@ abstract class AbstractClientToken extends AbstractToken
 
     /**
      * @Flow\Inject
-     * @var SecurityLoggerInterface
+     * @var LoggerInterface
      */
-    protected $securityLogger;
+    protected $systemLogger;
 
     /**
      * @var TokenEndpointInterface
@@ -84,7 +85,7 @@ abstract class AbstractClientToken extends AbstractToken
 
         if (!$actionRequest->hasArgument('code')) {
             $this->setAuthenticationStatus(TokenInterface::WRONG_CREDENTIALS);
-            $this->securityLogger->log('There was no argument `code` provided.', LOG_NOTICE);
+            $this->systemLogger->notice('There was no argument `code` provided.');
             return;
         }
         $code = $actionRequest->getArgument('code');
@@ -95,7 +96,7 @@ abstract class AbstractClientToken extends AbstractToken
             $this->setAuthenticationStatus(TokenInterface::AUTHENTICATION_NEEDED);
         } catch (Exception $exception) {
             $this->setAuthenticationStatus(TokenInterface::WRONG_CREDENTIALS);
-            $this->securityLogger->logException($exception);
+            $this->systemLogger->debug('UpdateCredentials failed', LogEnvironment::fromMethodName(__METHOD__));
             return;
         }
     }

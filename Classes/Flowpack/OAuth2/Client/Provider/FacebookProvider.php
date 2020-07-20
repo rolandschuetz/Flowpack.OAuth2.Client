@@ -13,11 +13,11 @@ namespace Flowpack\OAuth2\Client\Provider;
 
 use Flowpack\OAuth2\Client\Token\AbstractClientToken;
 use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Log\SecurityLoggerInterface;
 use Neos\Flow\Security\Account;
 use Neos\Flow\Security\Authentication\TokenInterface;
 use Neos\Flow\Security\Exception\UnsupportedAuthenticationTokenException;
 use Neos\Flow\Security\Policy\PolicyService;
+use Psr\Log\LoggerInterface;
 
 /**
  */
@@ -26,9 +26,9 @@ class FacebookProvider extends AbstractClientProvider
 
     /**
      * @Flow\Inject
-     * @var SecurityLoggerInterface
+     * @var LoggerInterface
      */
-    protected $securityLogger;
+    protected $systemLogger;
 
     /**
      * @Flow\Inject
@@ -89,7 +89,7 @@ class FacebookProvider extends AbstractClientProvider
         $requiredButNotPermittedScopes = array_diff($necessaryScopes, $scopesHavingPermissionFor);
         if (count($requiredButNotPermittedScopes) > 0) {
             $authenticationToken->setAuthenticationStatus(TokenInterface::WRONG_CREDENTIALS);
-            $this->securityLogger->log('The permitted scopes do not satisfy the required once.', LOG_NOTICE, array('necessaryScopes' => $necessaryScopes, 'allowedScopes' => $scopesHavingPermissionFor));
+            $this->systemLogger->notice('The permitted scopes do not satisfy the required once.', array('necessaryScopes' => $necessaryScopes, 'allowedScopes' => $scopesHavingPermissionFor));
             return;
         }
 
